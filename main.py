@@ -7,6 +7,7 @@
 import time, os
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import ElementNotInteractableException, NoSuchElementException
 
 
 
@@ -38,13 +39,24 @@ if(int(answer) == 1):
 
         time.sleep(20)
 
-        next_button = bot.find_element(By.XPATH, '//*[@id="next-button"]')
-        for i in range(3):
-            next_button.click()
-            time.sleep(1)
+        try:
+            next_button = bot.find_element(By.XPATH, '//*[@id="next-button"]')
+            for j in range(3):
+                try:
+                    next_button.click()
+                    time.sleep(1)
+                except (ElementNotInteractableException, NoSuchElementException):
+                    print("Next button not interactable, skipping...")
+                    time.sleep(1)
+        except NoSuchElementException:
+            print("Next button not found, skipping...")
 
-        done_button = bot.find_element(By.XPATH, '//*[@id="done-button"]')
-        done_button.click()
+        try:
+            done_button = bot.find_element(By.XPATH, '//*[@id="done-button"]')
+            done_button.click()
+        except (ElementNotInteractableException, NoSuchElementException):
+            print("Done button not interactable or not found, skipping...")
+
         time.sleep(5)
         bot.quit()
 
@@ -76,13 +88,24 @@ elif(int(answer) == 2):
 
         time.sleep(20)
 
-        next_button = bot.find_element(By.XPATH, '//*[@id="next-button"]')
-        for i in range(3):
-            next_button.click()
-            time.sleep(1)
+        try:
+            next_button = bot.find_element(By.XPATH, '//*[@id="next-button"]')
+            for j in range(3):
+                try:
+                    next_button.click()
+                    time.sleep(1)
+                except (ElementNotInteractableException, NoSuchElementException):
+                    print("Next button not interactable, skipping...")
+                    time.sleep(1)
+        except NoSuchElementException:
+            print("Next button not found, skipping...")
 
-        done_button = bot.find_element(By.XPATH, '//*[@id="done-button"]')
-        done_button.click()
+        try:
+            done_button = bot.find_element(By.XPATH, '//*[@id="done-button"]')
+            done_button.click()
+        except (ElementNotInteractableException, NoSuchElementException):
+            print("Done button not interactable or not found, skipping...")
+
         time.sleep(5)
         bot.quit()
 
