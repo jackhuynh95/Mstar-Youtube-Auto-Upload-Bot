@@ -1,22 +1,19 @@
-/*
- Copyright (c) 2026 Ashraf Morningstar
- These are personal recreations of existing projects, developed by Ashraf Morningstar
- for learning and skill development.
- Original project concepts remain the intellectual property of their respective creators.
- Repository: https://github.com/AshrafMorningstar
-*/
+# Copyright (c) 2026 Ashraf Morningstar
+# These are personal recreations of existing projects, developed by Ashraf Morningstar
+# for learning and skill development.
+# Original project concepts remain the intellectual property of their respective creators.
+# Repository: https://github.com/AshrafMorningstar
 
 import time, os
-from selenium import webdriver
+import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 
 
 
-options = webdriver.ChromeOptions()
-# options.add_experimental_option('excludeSwitches', ['enable-logging'])
-options.add_argument("--log-level=3")
-options.add_argument("user-data-dir=C:\\Users\\User\\AppData\\Local\Google\\Chrome Beta\\User Data\\")
-options.binary_location = "C:\\Program Files\\Google\\Chrome Beta\\Application\\chrome.exe"
+options = uc.ChromeOptions()
+# options.add_argument("--log-level=3")
+USER_DATA_DIR = "C:\\Users\\PC\\AppData\\Local\\Google\\Chrome\\SeleniumProfile"
+options.user_data_dir = USER_DATA_DIR
 print("\033[1;31;40m IMPORTANT: Put one or more videos in the *videos* folder in the bot directory. Please make sure to name the video files like this --> Ex: vid1.mp4 vid2.mp4 vid3.mp4 etc..")
 time.sleep(6)
 answer = input("\033[1;32;40m Press 1 if you want to spam same video or Press 2 if you want to upload multiple videos: ")
@@ -26,7 +23,7 @@ if(int(answer) == 1):
     howmany = input("\033[1;33;40m How many times you want to upload this video ---> ")
 
     for i in range(int(howmany)):
-        bot = webdriver.Chrome(executable_path="chromedriver.exe", chrome_options=options)
+        bot = uc.Chrome(options=options)
 
         bot.get("https://studio.youtube.com")
         time.sleep(3)
@@ -39,7 +36,7 @@ if(int(answer) == 1):
         abs_path = os.path.abspath(simp_path)
         file_input.send_keys(abs_path)
 
-        time.sleep(7)
+        time.sleep(20)
 
         next_button = bot.find_element(By.XPATH, '//*[@id="next-button"]')
         for i in range(3):
@@ -63,7 +60,7 @@ elif(int(answer) == 2):
     time.sleep(6)
 
     for i in range(count):
-        bot = webdriver.Chrome(executable_path="chromedriver.exe", chrome_options=options)
+        bot = uc.Chrome(options=options)
 
         bot.get("https://studio.youtube.com")
         time.sleep(3)
@@ -77,7 +74,7 @@ elif(int(answer) == 2):
         
         file_input.send_keys(abs_path)
 
-        time.sleep(7)
+        time.sleep(20)
 
         next_button = bot.find_element(By.XPATH, '//*[@id="next-button"]')
         for i in range(3):
